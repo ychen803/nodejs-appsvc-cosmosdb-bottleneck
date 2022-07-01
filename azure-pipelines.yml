@@ -144,16 +144,23 @@ stages:
     
     - task: AzureLoadTest@1
       inputs:
-        azureSubscription: $(serviceConnection)
+        azureSubscription: '$(serviceConnection)'
         loadTestConfigFile: 'SampleApp.yaml'
-        resourceGroup: $(loadTestResourceGroup)
-        loadTestResource: $(loadTestResource)
+        resourceGroup: '$(loadTestResourceGroup)'
+        loadTestResource: '$(loadTestResource)'
+        secrets: |
+          [
+                {
+                "name": "appToken",
+                "value": "$(mySecret)"
+                }
+            ]
         env: |
           [
             {
             "name": "webapp",
             "value": "$(webAppName).azurewebsites.net"
             }
-          ]        
+          ]
     - publish: $(System.DefaultWorkingDirectory)/loadTest
       artifact: results
