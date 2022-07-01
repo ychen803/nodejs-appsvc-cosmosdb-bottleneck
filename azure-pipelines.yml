@@ -154,13 +154,6 @@ stages:
             "name": "webapp",
             "value": "$(webAppName).azurewebsites.net"
             }
-          ]
-        secrets: |
-          [
-            {
-            "name": "appToken",
-            "value": "$(mySecret)"
-            }
-          ]         
+          ]        
     - publish: $(System.DefaultWorkingDirectory)/loadTest
       artifact: results
